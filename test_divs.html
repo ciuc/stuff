@@ -1,6 +1,6 @@
 <html>
 <head>
-
+    <script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
 <style>
 
 div {
@@ -10,11 +10,14 @@ div.padded{
     padding: 10px;
 }
 div.bordered{
-    border-radius: 5px;
+    border-radius: 10px;
     border:1px solid rgb(35,35,35);
 }
 div.shadowed{
-    box-shadow: 5px 5px 5px #2b2b2b;
+    box-shadow: 5px 5px 5px #4d4d4d;
+}
+div.chart {
+    height: 500px;
 }
 .clearfix::after {
   content: "";
@@ -23,6 +26,8 @@ div.shadowed{
 }
 body{
     background-color: rgb(25, 23, 23);
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 div.container{
     width:99%;
@@ -32,16 +37,35 @@ div.container{
     height: 100%;
     border-radius: 5px;
 }
+.hr{
+    height: 20px;
+    background-color: rgb(25, 23, 23);
+}
 </style>
+
 </head>
 <body>
+
     <div class="container clearfix">
-        <div style="width:50%;float: left;" class="clearfix padded">
-            <div class="bordered shadowed padded">aaa</div>
+        <div class="padded ">
+            <img src = "Pictures/logo_k.png"><br>
+            <a href="/dashboard.html">Dashboard</a> | <a href="/inxex.php">Status Page</a>
+        </div>
+        
+        <div class="hr">
+
+        </div>
+
+        <div style="width:50%;float: left;" class="clearfix padded ">
+            <div class="bordered shadowed padded chart clearfix">
+                <div id="chartContainer"></div>
+            </div>
         </div>
 
         <div style="width: 50%;float: right;"  class="clearfix padded">
-            <div class="bordered shadowed padded">xxx</div>
+            <div class="bordered shadowed padded chart">
+                <div id="chartContainer2"></div>
+            </div>
         </div>
         
         <div style="width: 70%;float: left;"  class="clearfix padded">
@@ -52,4 +76,83 @@ div.container{
         </div>
     </div>
 </body>
+<script>
+window.onload = function() {
+        //Create Chart
+var chart = new CanvasJS.Chart("chartContainer", {
+  //Chart Options - Check https://canvasjs.com/docs/charts/chart-options/
+  title:{
+    text: "Basic Column Chart in JavaScript"     ,
+    fontColor: "white"
+        
+  },
+  backgroundColor: "rgb(35, 37, 41)",
+  axisX:{
+     title: "axisX Title",
+     titleFontColor: "white",
+     labelFontColor: "white"
+  },
+  axisY:{
+     title: "axisX Title",
+     titleFontColor: "white",
+     labelFontColor: "white"
+  },
+  data: [{
+    type: "column",
+    dataPoints: [
+      { label: "apple",  y: 10  },
+      { label: "orange", y: 15  },
+      { label: "banana", y: 25  },
+      { label: "mango",  y: 30  },
+      { label: "grape",  y: 28  }
+    ]
+  }]
+});
+//Render Chart
+chart.render();
+
+
+     
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+      theme: "dark2", // "light1", "light2", "dark1"
+      animationEnabled: true,
+      exportEnabled: true,
+      title: {
+        text: "Top 10 Most Viewed YouTube Videos"
+      },
+      axisX: {
+        margin: 10,
+        labelPlacement: "inside",
+        tickPlacement: "inside"
+      },
+      axisY2: {
+        title: "Views (in billion)",
+        titleFontSize: 14,
+        includeZero: true,
+        suffix: "bn"
+      },
+      data: [{
+        type: "bar",
+        axisYType: "secondary",
+        yValueFormatString: "#,###.##bn",
+        indexLabel: "{y}",
+        dataPoints: [
+          { label: "Learning Colors", y: 4.91 },
+          { label: "Uptown Funk", y: 4.96 },
+          { label: "Wheels on the Bus", y: 5.36 },
+          { label: "Phonics Song with Two Words", y: 5.36 },
+          { label: "See You Again", y: 5.94 },
+          { label: "Shape of You", y: 6.02 },
+          { label: "Bath Song", y: 6.26 },
+          { label: "Johny Johny Yes Papa", y: 6.73 },
+          { label: "Despacito", y: 8.20 },
+          { label: "Baby Shark Dance", y: 13.01 }
+        ]
+      }]
+    });
+    chart2.render();
+
+}
+</script>
+
 </html>
